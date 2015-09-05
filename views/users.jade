@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    .container-fluid
+        h1 Users
+        each user in users
+            .row.col-lg-6
+             ul.list-group
+                li.list-group-item#firstName First Name:
+                   span=user.firstName
+                li.list-group-item#lastName Last Name:
+                   span=user.lastName
+                li.list-group-item#username Username:
+                   span=user.username
+                li.list-group-item#emailAddress Email Address:
+                   span=user.email

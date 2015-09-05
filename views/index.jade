@@ -2,12 +2,16 @@ extends layout
 
 block content
   form(action="/" method="post")
-    div
-      label(for="username") Username:
-      input(type="text" name="username" id="username")
-    div
-      label(for="password") Password:
-      input(type="password" name="password" id="password")
-    div
+    div(class = "input-group col-md-6")
+      span.input-group-addon#username Username
+      input.form-control(type="text" name="username" id="username" placeholder="Username" aria-describedby="username")
+    div(class = "input-group col-md-6")
+      span.input-group-addon#password Password
+      //label.form-control(for="password") Password:
+      input.form-control(type="password" name="password" id="password" placeholder="Password")
+    div(class = "input-group col-md-6")
       input(type="submit" value="Log In")
-      a(href="/register") Register
+  div.col-md-2#register
+    ul(class = "nav nav-pills")
+      li.active(role="presentation")
+        a(href="/register") Register
