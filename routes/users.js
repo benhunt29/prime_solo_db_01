@@ -18,6 +18,7 @@ router.get('/', function(req, res, next) {
     });
 
   }else{
+      req.flash('unauthorizedUser','You Must Login to Access This Page!');
       res.redirect('../');
   }
 });
@@ -44,6 +45,7 @@ router.get('/list', function(req,res,next){
         });
     }else{
         res.redirect('../');
+
     }
 });
 

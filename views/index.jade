@@ -1,7 +1,13 @@
 extends layout
 
 block content
-  form(action="/" method="post")
+  - if (messages.incorrectCredentialsMsg)
+      .alert.alert-danger.col-md-3.col-md-offset-2(role="alert")
+        span=messages.incorrectCredentialsMsg
+  - if (messages.unauthorizedUser)
+    .alert.alert-danger.col-md-3.col-md-offset-2(role="alert")
+      span=messages.unauthorizedUser[0]
+  form.col-md-12(action="/" method="post")
     div(class = "input-group col-md-6")
       span.input-group-addon#username Username
       input.form-control(type="text" name="username" id="username" placeholder="Username" aria-describedby="username")

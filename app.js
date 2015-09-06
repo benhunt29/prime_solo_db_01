@@ -9,6 +9,7 @@ var session = require('express-session');
 var localStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var User = require('./models/user');
+var flash = require('express-flash');
 
 var mongoURI = "mongodb://localhost:27017/prime_example_passport";
 var MongoDB = mongoose.connect(mongoURI).connection;
@@ -48,8 +49,11 @@ app.use(session({
   cookie: {maxAge: 60000, secure:false}
 }));
 
+
+
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 passport.serializeUser(function(user,done){
   done(null,user.id);
@@ -68,13 +72,14 @@ passport.use('local',new localStrategy({ passReqToCallback:true,
       usernameField:'username'},
     function(req,username,password,done){
       User.findOne({ username: username },function(err,user){
-
         if(err) {
+          //req.flash('incorrectCredentialsMsg', 'Incorrect username and/or password.');
           throw err;
         }
 
         if(!user){
-          return done(null,false,{message: 'Incorrect username and/or password.'});
+          console.log('nouser');
+          return done(null,false,req.flash('incorrectCredentialsMsg', 'Incorrect username and/or password.'));
         }
 
         user.comparePassword(password, function(err,isMatch){
@@ -84,7 +89,7 @@ passport.use('local',new localStrategy({ passReqToCallback:true,
           if(isMatch){
             return done(null,user);
           }else {
-            done(null, false, {message: 'Incorrect username and/or password.'})
+            done(null, false,req.flash('incorrectCredentialsMsg', 'Incorrect username and/or password.'));
           }
         });
       });
