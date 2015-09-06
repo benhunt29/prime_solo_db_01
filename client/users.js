@@ -28,4 +28,9 @@ function displayUsers(users){
 $(document).ready(function(){
     source = $('#userTemplate').html();
     getUsers();
+
+    $('#logout').on('click',function(){
+        window.location = '/users/logout';
+    });
+
 });
