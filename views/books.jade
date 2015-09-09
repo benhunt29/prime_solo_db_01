@@ -1,0 +1,37 @@
+extends layout
+block content
+
+
+   .container-fluid#booksContainer
+        .row.col-md-12
+            form.col-md-9(action="/books/add" method="post")
+                div(class = "input-group col-md-6")
+                    span.input-group-addon#bookTitle Book Title
+                    //label.form-control(for="username") Username:
+                    input.form-control(type="text" name="bookTitle" id="bookTitle" placeholder="Title" aria-describedby="username")
+                div(class = "input-group col-md-6")
+                    span.input-group-addon#bookAuthor Book Author
+                    //label.form-control(for="password") Password:
+                    input.form-control(type="text" name="bookAuthor" id="bookAuthor" placeholder="Author" aria-describedby="password")
+                div(class = "input-group col-md-6")
+                    input.form-control(type="submit" value="Add Book")
+            div.col-md-3#logout
+                ul(class = "nav nav-pills")
+                    li.active(role="presentation")
+                        a(href="users/logout") Logout
+        .ro.col-md-12
+            h1.col-md-6 Favorite Books
+            script(id='bookTemplate' type = 'text/x-handlebars-template').
+             {{#each this}}
+                <div class = "row col-lg-6 users">
+                   <div class = "well col-lg-12">
+                       <h1 id="username">{{username}}</h1>
+                       <ul class="list-group">
+                          <li id="bookTitle" class="list-group-item">Title: <span>{{bookTitle}}</span></li>
+                          <li id="bookAuthor" class="list-group-item">Author: <span>{{bookAuthor}}</span></li>
+                          <li id="email" class="list-group-item">Email: <span>{{email}}</span></li>
+                       </ul>
+                   </div>
+                </div>
+              {{/each}}
+    script(src='./assets/scripts/books.min.js' type='text/javascript')

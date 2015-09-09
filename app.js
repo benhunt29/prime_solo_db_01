@@ -25,6 +25,7 @@ MongoDB.once('open',function(){
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var register = require('./routes/register');
+var books = require('./routes/books');
 
 var app = express();
 
@@ -98,6 +99,7 @@ passport.use('local',new localStrategy({ passReqToCallback:true,
 app.use('/', routes);
 app.use('/users', users);
 app.use('/register',register);
+app.use('/books',books);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
